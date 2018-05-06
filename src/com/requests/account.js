@@ -223,7 +223,7 @@ let forwarded = function(endpoint, address) {
  *
  * @return {object} - An array of [NamespaceMetaDataPair]{@link http://bob.nem.ninja/docs/#namespaceMetaDataPair} objects
  */
-let namespacesOwned = function(endpoint, address, parent){
+let namespacesOwned = function(endpoint, address, parent, id=null){
 	// Configure the request
 	var options = {
 	    url: Helpers.formatEndpoint(endpoint) + '/account/namespace/page',
@@ -231,6 +231,9 @@ let namespacesOwned = function(endpoint, address, parent){
 	    headers: Headers.urlEncoded,
 	    qs: { 'address': address, 'parent': parent || ""}
 	}
+    if(id){
+        options["qs"]["id"] = id;
+    }
 	// Send the request
 	return Send(options);
 }
