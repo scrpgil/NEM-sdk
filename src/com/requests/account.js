@@ -264,14 +264,17 @@ let mosaicDefinitionsCreated = function(endpoint, address, parent){
  *
  * @return {array} - An array of [MosaicDefinition]{@link http://bob.nem.ninja/docs/#mosaicDefinition} objects
  */
-let mosaicDefinitions = function(endpoint, address){
+let mosaicDefinitions = function(endpoint, address, id){
 	// Configure the request
 	var options = {
 	    url: Helpers.formatEndpoint(endpoint) + '/account/mosaic/owned/definition',
 	    method: 'GET',
 	    headers: Headers.urlEncoded,
-	    qs: { 'address': address }
+	    qs: { 'address': address, 'pageSize':50 }
 	}
+    if(id){
+        options["qs"]["id"] = id;
+    }
 	// Send the request
 	return Send(options);
 }
@@ -284,14 +287,17 @@ let mosaicDefinitions = function(endpoint, address){
  *
  * @return {array} - An array of [Mosaic]{@link http://bob.nem.ninja/docs/#mosaic} objects
  */
-let mosaicsOwned = function(endpoint, address){
+let mosaicsOwned = function(endpoint, address, id){
 	// Configure the request
 	var options = {
 	    url: Helpers.formatEndpoint(endpoint) + '/account/mosaic/owned',
 	    method: 'GET',
 	    headers: Headers.urlEncoded,
-	    qs: { 'address': address }
+	    qs: { 'address': address, 'pageSize':50 }
 	}
+    if(id){
+        options["qs"]["id"] = id;
+    }
 	// Send the request
 	return Send(options);
 }
