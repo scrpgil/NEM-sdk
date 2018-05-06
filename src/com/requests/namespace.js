@@ -30,14 +30,17 @@ let roots = function(endpoint, id){
  *
  * @return {object} - An array of [MosaicDefinition]{@link http://bob.nem.ninja/docs/#mosaicDefinition} objects
  */
-let mosaicDefinitions = function(endpoint, id){
+let mosaicDefinitions = function(endpoint, id, i=null){
 	// Configure the request
 	var options = {
 	    url: Helpers.formatEndpoint(endpoint) + '/namespace/mosaic/definition/page',
 	    method: 'GET',
 	    headers: Headers.urlEncoded,
-	    qs: {'namespace': id}
+	    qs: {'namespace': id, 'pageSize': 100}
 	}
+    if(i){
+        options["qs"]["id"] = i;
+    }
 	// Send the request
 	return Send(options);
 }
